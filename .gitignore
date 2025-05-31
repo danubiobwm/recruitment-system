@@ -1,0 +1,123 @@
+# Diretórios gerais a ignorar
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+node_modules/
+dist/
+bin/
+tmp/
+build/
+out/
+coverage/
+
+# Backend (Go)
+# Binários e arquivos temporários
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+*.prof
+*.log
+*.zip
+*.tar.gz
+
+# Go workspace file
+go.work
+
+# Dependências do Go
+vendor/
+
+# Frontend (React/Vite)
+.cache/
+.turbo/
+.next/
+.yarn/
+.pnp.*
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Testes
+/junit.xml
+
+# Sistema
+Thumbs.db
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Arquivos específicos do macOS
+._*
+
+# Arquivos específicos do Windows
+[Dd]esktop.ini
+
+# Arquivos de configuração local
+*.local
+
+# Arquivos de IDE
+.idea
+*.iml
+
+# Arquivos de desenvolvimento
+*.patch
+
+# Arquivos de ambiente (exceto .env.example)
+.env*
+!.env.example
+
+# Arquivos de depuração
+debug
+*.stackdump
+
+# Arquivos do Vite
+.vite/
+
+# Arquivos do ESLint
+.eslintcache
+
+# Arquivos do TypeScript
+tsconfig.tsbuildinfo
+
+# Arquivos do Jest
+jest.config.js
+/junit.xml
+
+# Arquivos do Yarn
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# Arquivos do pnpm
+node_modules/
+.pnpm/
+.pnpm-store/
+
+# Arquivos do Docker
+docker-compose.override.yml
