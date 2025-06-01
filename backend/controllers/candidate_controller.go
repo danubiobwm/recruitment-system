@@ -12,8 +12,6 @@ import (
 type UpdateCandidateInput struct {
 	Name  string `json:"name"`
 	Email string `json:"email"`
-	// Adicione outros campos editáveis aqui, por exemplo:
-	// Phone string `json:"phone"`
 }
 
 func CreateCandidate(c *gin.Context) {
@@ -82,7 +80,6 @@ func UpdateCandidate(c *gin.Context) {
 	// Atualize somente os campos que você quer permitir
 	candidate.Name = input.Name
 	candidate.Email = input.Email
-	// Atualize outros campos, se necessário
 
 	if err := database.DB.Save(&candidate).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update candidate"})

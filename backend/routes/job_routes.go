@@ -12,7 +12,7 @@ func SetupJobRoutes(router *gin.Engine) {
 	jobs.Use(middleware.AuthMiddleware())
 
 	jobs.POST("/jobs", controllers.CreateJob)
-	jobs.GET("/jobs", controllers.ListJobs)
+	jobs.GET("/jobs", controllers.GetJobs)
 	jobs.GET("/jobs/:id", controllers.GetJob)
 	jobs.PUT("/api/jobs/:id", controllers.UpdateJob)
 	jobs.DELETE("/jobs/:id", controllers.DeleteJob)

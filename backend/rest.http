@@ -77,7 +77,7 @@ Content-Type: application/json
 ### ========================
 ### Deletar vaga
 ### ========================
-DELETE {{baseUrl}}/api/jobs/{{job_id}}
+DELETE {{baseUrl}}/api/jobs/1
 Authorization: Bearer {{auth_token}}
 
 ### ========================
@@ -92,9 +92,9 @@ Content-Type: application/json
   "name": "João Silva",
   "email": "joao@example.com",
   "phone": "11999999999",
-  "resume": "https://linkedin.com/joao",
+  "resume": "https://linkedin.com/in/joao",
   "status": "applied",
-  "jobId": {{job_id}}
+  "jobId": 1
 }
 
 @candidate_id = {{create_candidate.response.body.id}}
@@ -108,13 +108,13 @@ Authorization: Bearer {{auth_token}}
 ### ========================
 ### Obter candidato específico
 ### ========================
-GET {{baseUrl}}/api/candidates/{{candidate_id}}
+GET {{baseUrl}}/api/candidates/1
 Authorization: Bearer {{auth_token}}
 
 ### ========================
 ### Atualizar candidato
 ### ========================
-PUT {{baseUrl}}/api/candidates/{{candidate_id}}
+PUT {{baseUrl}}/api/candidates/1
 Authorization: Bearer {{auth_token}}
 Content-Type: application/json
 
