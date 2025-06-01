@@ -1,15 +1,11 @@
-FROM golang:1.21-alpine
+FROM golang:1.24
 
 WORKDIR /app
 
-COPY go.mod ./
-COPY go.sum ./
-RUN go mod download
-
 COPY . .
 
-RUN go build -o main .
+RUN chmod +x wait-for-it.sh
 
-EXPOSE 8080
+RUN go mod download
 
-CMD ["./main"]
+CMD ["go", "run", "main.go"]

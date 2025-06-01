@@ -1,8 +1,10 @@
 @baseUrl = http://localhost:8080
 
-################################
+### ========================
+### Registrar novo usuário
+### ========================
 # @name register
-POST {{baseUrl}}/auth/register
+POST {{baseUrl}}/register
 Content-Type: application/json
 
 {
@@ -10,9 +12,11 @@ Content-Type: application/json
   "password": "password123"
 }
 
-################################
+### ========================
+### Login para obter token
+### ========================
 # @name login
-POST {{baseUrl}}/auth/login
+POST {{baseUrl}}/login
 Content-Type: application/json
 
 {
@@ -20,14 +24,17 @@ Content-Type: application/json
   "password": "password123"
 }
 
-###
 @auth_token = {{login.response.body.token}}
-################################
 
-### Health Check
-GET {{baseUrl}}/health
+### ========================
+### Obter usuário atual
+### ========================
+GET {{baseUrl}}/api/me
+Authorization: Bearer {{auth_token}}
 
-################################
+### ========================
+### Criar vaga
+### ========================
 # @name create_job
 POST {{baseUrl}}/api/jobs
 Authorization: Bearer {{auth_token}}
@@ -39,19 +46,24 @@ Content-Type: application/json
   "status": "open"
 }
 
-###
 @job_id = {{create_job.response.body.id}}
-################################
 
+### ========================
 ### Listar todas as vagas
+### ========================
+# @name list_jobs
 GET {{baseUrl}}/api/jobs
 Authorization: Bearer {{auth_token}}
 
+### ========================
 ### Obter vaga específica
+### ========================
 GET {{baseUrl}}/api/jobs/{{job_id}}
 Authorization: Bearer {{auth_token}}
 
+### ========================
 ### Atualizar vaga
+### ========================
 PUT {{baseUrl}}/api/jobs/{{job_id}}
 Authorization: Bearer {{auth_token}}
 Content-Type: application/json
@@ -62,11 +74,15 @@ Content-Type: application/json
   "status": "open"
 }
 
+### ========================
 ### Deletar vaga
+### ========================
 DELETE {{baseUrl}}/api/jobs/{{job_id}}
 Authorization: Bearer {{auth_token}}
 
-################################
+### ========================
+### Criar candidato
+### ========================
 # @name create_candidate
 POST {{baseUrl}}/api/candidates
 Authorization: Bearer {{auth_token}}
@@ -81,19 +97,23 @@ Content-Type: application/json
   "jobId": {{job_id}}
 }
 
-###
 @candidate_id = {{create_candidate.response.body.id}}
-################################
 
-### Listar todos os candidatos
+### ========================
+### Listar candidatos
+### ========================
 GET {{baseUrl}}/api/candidates
 Authorization: Bearer {{auth_token}}
 
+### ========================
 ### Obter candidato específico
+### ========================
 GET {{baseUrl}}/api/candidates/{{candidate_id}}
 Authorization: Bearer {{auth_token}}
 
+### ========================
 ### Atualizar candidato
+### ========================
 PUT {{baseUrl}}/api/candidates/{{candidate_id}}
 Authorization: Bearer {{auth_token}}
 Content-Type: application/json
@@ -105,14 +125,8 @@ Content-Type: application/json
   "status": "interviewing"
 }
 
+### ========================
 ### Deletar candidato
+### ========================
 DELETE {{baseUrl}}/api/candidates/{{candidate_id}}
-Authorization: Bearer {{auth_token}}
-
-### Obter usuário atual
-GET {{baseUrl}}/auth/me
-Authorization: Bearer {{auth_token}}
-
-### Logout
-POST {{baseUrl}}/auth/logout
 Authorization: Bearer {{auth_token}}

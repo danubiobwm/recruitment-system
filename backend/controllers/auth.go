@@ -17,14 +17,19 @@ func Register(c *gin.Context) {
 		return
 	}
 
-	hash, _ := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.DefaultCost)
+	hash, err := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.DefaultCost)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro ao gerar hash da senha"})
+		return
+	}
+
 	user := models.User{Email: input.Email, Password: string(hash)}
 	if err := database.DB.Create(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Email já cadastrado"})
 		return
 	}
 
-	token := utils.GenerateToken(user.ID)
+	token := utils.GenerateToken(user.Email)
 	c.JSON(http.StatusOK, gin.H{"token": token})
 }
 
@@ -47,13 +52,23 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	token := utils.GenerateToken(user.ID)
+	token := utils.GenerateToken(user.Email)
 	c.JSON(http.StatusOK, gin.H{"token": token})
 }
 
 func Me(c *gin.Context) {
-	userID, _ := c.Get("userID")
+	userEmail, exists := c.Get("userEmail")
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Usuário não encontrado"})
+		return
+	}
+
 	var user models.User
-	database.DB.First(&user, userID)
-	c.JSON(http.StatusOK, gin.H{"user": user.Email})
+	database.DB.First(&user, "email = ?", userEmail)
+	if user.ID == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Usuário não encontrado"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"email": user.Email})
 }
