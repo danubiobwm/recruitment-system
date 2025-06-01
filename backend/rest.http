@@ -58,13 +58,13 @@ Authorization: Bearer {{auth_token}}
 ### ========================
 ### Obter vaga específica
 ### ========================
-GET {{baseUrl}}/api/jobs/{{job_id}}
+GET {{baseUrl}}/api/jobs/1
 Authorization: Bearer {{auth_token}}
 
 ### ========================
 ### Atualizar vaga
 ### ========================
-PUT {{baseUrl}}/api/jobs/{{job_id}}
+PUT {{baseUrl}}/api/jobs/1
 Authorization: Bearer {{auth_token}}
 Content-Type: application/json
 

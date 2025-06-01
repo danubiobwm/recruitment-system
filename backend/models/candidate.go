@@ -4,10 +4,10 @@ import "gorm.io/gorm"
 
 type Candidate struct {
 	gorm.Model
-	Name   string
-	Email  string
-	Phone  string
-	Resume string
-	Status string
-	JobID  uint
+	Name   string `json:"name"`
+	Email  string `json:"email"`
+	Phone  string `json:"phone"`
+	Resume string `json:"resume"`
+	Status string `json:"status"`
+	JobID  uint   `json:"jobId"`
 }
